@@ -49,8 +49,8 @@ router.get("/validateUser", async (req, res) => {
   //save cookies
   if (result[0] != null) {
     cookieHandler.saveUserCookies(res, result);
-    console.log("/home");
-    res.send("/home");
+    console.log("/userHome");
+    res.send("/userHome");
   } else {
     res.send("not");
   }
