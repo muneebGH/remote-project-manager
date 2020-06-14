@@ -17,12 +17,10 @@ app.use(cookieParser());
 app.use("/", require("./server/routers/userRouter"));
 app.use("/adminHome", require("./server/routers/adminHomeRouter"));
 app.use("/userHome", require("./server/routers/userHomeRouter"));
+
+//server start listening
 const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   console.log(`server started at port ${port}`);
   await DBManager.establishConnection();
 });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.resolve(__dirname + "/ui/login.html"));
-// });

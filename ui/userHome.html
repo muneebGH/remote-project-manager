@@ -35,22 +35,73 @@
           <div class="btn-group" role="group">
             <!-- Button trigger modal -->
 
+            <!-- Button trigger modal -->
             <button
-              onclick="document.getElementById('file-input').click();"
-              class="btn btn-light border rounded shadow-sm"
               type="button"
+              class="btn btn-light border rounded shadow-sm"
+              data-toggle="modal"
+              data-target="#uploadModal"
               style="font-family: Actor, sans-serif; margin-right: 3px;"
-              s
             >
               upload
             </button>
 
-            <input
-              id="file-input"
-              type="file"
-              name="file"
-              style="display: none;"
-            />
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="uploadModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      New Post
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-left">
+                    <form>
+                      <div class="form-group">
+                        <label for="link" class="col-form-label"
+                          >link of file</label
+                        >
+                        <input type="text" class="form-control" id="link" />
+                      </div>
+                      <div class="form-group">
+                        <label for="comment" class="col-form-label"
+                          >Comment</label
+                        >
+                        <textarea class="form-control" id="comment"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      upload
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button
               class="btn btn-light border rounded shadow-sm"
               data-toggle="modal"
@@ -110,7 +161,8 @@
                 </div>
               </div>
             </div>
-            <button
+
+            <a
               class="btn btn-danger border rounded shadow-sm"
               data-toggle="tooltip"
               data-bs-tooltip=""
@@ -118,9 +170,10 @@
               type="button"
               title="Click to log out"
               style="font-family: Actor, sans-serif; margin-left: 3px;"
+              href="/login"
             >
               Log out
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -156,28 +209,13 @@
             style="font-style: normal; color: #17706e;"
             title="click to download"
           >
-            xhj1234d.xlsx
+            <a href="#">File link</a>
           </h4>
           <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
           <p class="card-text">
             This text is additional comments which user posted while
             uploading&nbsp;
           </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-            >
-              Reject
-            </button>
-          </div>
         </div>
       </div>
       <div
@@ -207,29 +245,13 @@
             style="font-style: normal; color: #17706e;"
             title="click to download"
           >
-            jmdcjnrfu23.xslx
+            <a href="#">File link</a>
           </h4>
           <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
           <p class="card-text">
             This text is additional comments which user posted while
             uploading&nbsp;
           </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-              disabled
-            >
-              Reject
-            </button>
-          </div>
         </div>
       </div>
       <div
@@ -259,29 +281,13 @@
             style="font-style: normal; color: #17706e;"
             title="click to download"
           >
-            kncjenn123.xslx
+            <a href="#">File link</a>
           </h4>
           <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
           <p class="card-text">
             This text is additional comments which user posted while
             uploading&nbsp;
           </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-              disabled
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-            >
-              Reject
-            </button>
-          </div>
         </div>
       </div>
     </div>
