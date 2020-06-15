@@ -13,10 +13,10 @@ router.get("/", (req, res) => {
   }
   res.sendFile(path.resolve(__dirname + "/../../ui/home.html"));
 });
-router.get("/signup", (req, res) => {
-  // if (!userAccessManager.isLoggedIn(req)) {
-  //   res.redirect("/login");
-  // }
+router.get("/addUser", (req, res) => {
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   res.sendFile(path.resolve(__dirname + "/../../ui/signup.html"));
 });
 router.post("/createUser", async (req, res) => {

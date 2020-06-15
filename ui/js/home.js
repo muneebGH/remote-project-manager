@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  console.log("ready called");
+  if (getCookie("admin") == "false") {
+    $("#createUserButton").hide();
+  }
   $("[data-bs-tooltip]").tooltip();
   document.getElementById("welcomeText").innerText =
     "Welcome " + getCookie("fullName");
