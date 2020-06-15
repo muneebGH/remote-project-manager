@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  console.log("ready called");
   $("[data-bs-tooltip]").tooltip();
   document.getElementById("welcomeText").innerText =
     "Welcome " + getCookie("fullName");
