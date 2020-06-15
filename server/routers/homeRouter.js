@@ -63,8 +63,9 @@ router.get("/fetchAllUserPosts", async (req, res) => {
 });
 
 router.post("/deletePost", async (req, res) => {
-  console.log();
-  console.log("delete post called");
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   var [result, error] = await postHandler.deletePost(req.param("id"));
   if (error) {
     res.send("server error");
@@ -74,8 +75,9 @@ router.post("/deletePost", async (req, res) => {
 });
 
 router.post("/updateStatus", async (req, res) => {
-  console.log(req.param("id"));
-  console.log(req.param("newStatus"));
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   var [result, error] = await postHandler.updatePostStatus(
     req.param("id"),
     req.param("newStatus")

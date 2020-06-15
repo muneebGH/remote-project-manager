@@ -2,6 +2,7 @@ $(document).ready(function () {
   if (getCookie("admin") == "false") {
     $("#createUserButton").hide();
   }
+
   $("[data-bs-tooltip]").tooltip();
   document.getElementById("welcomeText").innerText =
     "Welcome " + getCookie("fullName");
@@ -10,6 +11,7 @@ $(document).ready(function () {
     $("#dateChooser").val(),
     document.getElementById("dropdownMenu").innerText
   );
+  updateDatePanel();
 });
 
 function uploadPost(event) {
@@ -59,6 +61,7 @@ function fetchPostsWithDateAndStatus(date, status) {
       data.forEach(addPostToPage);
       document.getElementById("refreshButton").innerText = "Refresh";
       $("#dateChooserModal").modal("hide");
+      updateDatePanel();
     }
   );
 }
@@ -157,6 +160,15 @@ function getDateStr() {
   return date.getFullYear() + "-" + monthStr + "-" + dateStr;
 }
 
+function updateDatePanel() {
+  document.getElementById("datePanel").innerText = document.getElementById(
+    "dateChooser"
+  ).value;
+}
+
+function saveDateHandler(event) {
+  updateDatePanel();
+}
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
