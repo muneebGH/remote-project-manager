@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   if (!userAccessManager.isLoggedIn(req)) {
     res.redirect("/login");
   }
-  res.sendFile(path.resolve(__dirname + "/../../ui/userHome.html"));
+  res.sendFile(path.resolve(__dirname + "/../../ui/home.html"));
 });
 
 router.post("/addPost", async (req, res) => {

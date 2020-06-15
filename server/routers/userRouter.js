@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   if (!userAccessManager.isLoggedIn(req)) {
     res.redirect("/login");
   }
-  res.sendFile(path.resolve(__dirname + "/../../ui/test.html"));
+  res.sendFile(path.resolve(__dirname + "/../../ui/home.html"));
 });
 router.get("/signup", (req, res) => {
   // if (!userAccessManager.isLoggedIn(req)) {
@@ -49,8 +49,8 @@ router.get("/validateUser", async (req, res) => {
   //save cookies
   if (result[0] != null) {
     cookieHandler.saveUserCookies(res, result);
-    console.log("/userHome");
-    res.send("/userHome");
+    console.log("/home");
+    res.send("/home");
   } else {
     res.send("not");
   }

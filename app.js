@@ -15,8 +15,7 @@ app.use(cookieParser());
 //routers
 
 app.use("/", require("./server/routers/userRouter"));
-app.use("/adminHome", require("./server/routers/adminHomeRouter"));
-app.use("/userHome", require("./server/routers/userHomeRouter"));
+app.use("/home", require("./server/routers/homeRouter"));
 
 //server start listening
 const port = process.env.PORT || 5000;

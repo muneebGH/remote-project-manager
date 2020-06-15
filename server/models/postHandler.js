@@ -34,8 +34,7 @@ async function allPostsOfUser(userName, userDate, status, isAdmin) {
       error = true;
     }
   });
-  console.log(`res :${response}`);
-  console.log(`err :${error}`);
+
   return [response, error];
 }
 

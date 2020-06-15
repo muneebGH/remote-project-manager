@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
-    <title>Untitled</title>
+    <title>Home</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
@@ -29,32 +29,144 @@
     <div class="container" style="margin: 10px 5px 5px 5px;">
       <div class="row">
         <div class="col text-left">
-          <h2 class="text-center" style="color: #f5f5f5;">Welcome Muneeb</h2>
+          <h2 class="text-center" style="color: #f5f5f5;" id="welcomeText">
+            Welcome Muneeb
+          </h2>
         </div>
         <div class="col text-right">
           <div class="btn-group" role="group">
             <!-- Button trigger modal -->
 
+            <!-- Button trigger modal -->
+
+            <div class="dropdown">
+              <button
+                class="btn btn-light border rounded shadow-sm dropdown-toggle"
+                type="button"
+                id="dropdownMenu"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style="font-family: Actor, sans-serif; margin-right: 3px;"
+              >
+                All
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  onclick="AllDropdownButtonHandler(event)"
+                >
+                  All
+                </button>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  onclick="pendingDropdownButtonHandler(event)"
+                >
+                  Pending
+                </button>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  onclick="approvedDropdownButtonHandler(event)"
+                >
+                  Approved
+                </button>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  onclick="rejectedDropdownButtonHandler(event)"
+                >
+                  Rejected
+                </button>
+              </div>
+            </div>
             <button
-              onclick="document.getElementById('file-input').click();"
-              class="btn btn-light border rounded shadow-sm"
+              name="button"
+              onclick="refreshHandler(event)"
               type="button"
+              class="btn btn-light border rounded shadow-sm"
               style="font-family: Actor, sans-serif; margin-right: 3px;"
-              s
+              id="refreshButton"
+            >
+              Refresh
+            </button>
+            <button
+              type="button"
+              class="btn btn-light border rounded shadow-sm"
+              data-toggle="modal"
+              data-target="#uploadModal"
+              style="font-family: Actor, sans-serif; margin-right: 3px;"
             >
               upload
             </button>
 
-            <input
-              id="file-input"
-              type="file"
-              name="file"
-              style="display: none;"
-            />
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="uploadModal"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      New Post
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-left">
+                    <form>
+                      <div class="form-group">
+                        <label for="link" class="col-form-label"
+                          >link of file</label
+                        >
+                        <input type="text" class="form-control" id="link" />
+                      </div>
+                      <div class="form-group">
+                        <label for="comment" class="col-form-label"
+                          >Comment</label
+                        >
+                        <textarea class="form-control" id="comment"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      id="uploadButton"
+                      class="btn btn-primary"
+                      onclick="uploadPost(event)"
+                    >
+                      upload
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button
               class="btn btn-light border rounded shadow-sm"
               data-toggle="modal"
-              data-target="#exampleModal"
+              data-target="#dateChooserModal"
               type="button"
               style="font-family: Actor, sans-serif;"
             >
@@ -64,7 +176,7 @@
             <!-- Modal -->
             <div
               class="modal fade"
-              id="exampleModal"
+              id="dateChooserModal"
               tabindex="-1"
               role="dialog"
               aria-labelledby="exampleModalLabel"
@@ -88,11 +200,11 @@
                   <div class="modal-body">
                     <input
                       type="date"
-                      id="start"
+                      id="dateChooser"
                       name="trip-start"
                       value="2018-07-22"
-                      min="2018-01-01"
-                      max="2018-12-31"
+                      min="2020-06-14"
+                      max="2020-12-31"
                     />
                   </div>
                   <div class="modal-footer">
@@ -101,16 +213,21 @@
                       class="btn btn-secondary"
                       data-dismiss="modal"
                     >
-                      Close
+                      Save date
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="dateChooserHandler(event)"
+                    >
                       See results
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <button
+
+            <a
               class="btn btn-danger border rounded shadow-sm"
               data-toggle="tooltip"
               data-bs-tooltip=""
@@ -118,9 +235,10 @@
               type="button"
               title="Click to log out"
               style="font-family: Actor, sans-serif; margin-left: 3px;"
+              href="/login"
             >
               Log out
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -128,162 +246,9 @@
     <div
       class="container text-center"
       style="overflow-y: scroll; overflow-x: hidden; height: 600px;"
+      id="postContainer"
     >
-      <div
-        class="card text-center border rounded shadow"
-        style="
-          margin-top: 10px;
-          margin-right: 10px;
-          font-family: Actor, sans-serif;
-          margin-bottom: 10px;
-          margin-left: 10px;
-        "
-      >
-        <div
-          class="card-header"
-          style="background-color: #393e46; color: #f5f5f5;"
-        >
-          <div class="row">
-            <div class="col text-left">Pending</div>
-            <div class="col text-right">12/3/20</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h4
-            class="text-lowercase card-title"
-            data-toggle="tooltip"
-            data-bs-tooltip=""
-            style="font-style: normal; color: #17706e;"
-            title="click to download"
-          >
-            xhj1234d.xlsx
-          </h4>
-          <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
-          <p class="card-text">
-            This text is additional comments which user posted while
-            uploading&nbsp;
-          </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-            >
-              Reject
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card text-center border rounded shadow"
-        style="
-          margin-top: 10px;
-          margin-right: 10px;
-          font-family: Actor, sans-serif;
-          margin-bottom: 10px;
-          margin-left: 10px;
-        "
-      >
-        <div
-          class="card-header"
-          style="background-color: #d92027; color: #f5f5f5;"
-        >
-          <div class="row">
-            <div class="col text-left">Rejected</div>
-            <div class="col text-right">12/3/20</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h4
-            class="text-lowercase card-title"
-            data-toggle="tooltip"
-            data-bs-tooltip=""
-            style="font-style: normal; color: #17706e;"
-            title="click to download"
-          >
-            jmdcjnrfu23.xslx
-          </h4>
-          <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
-          <p class="card-text">
-            This text is additional comments which user posted while
-            uploading&nbsp;
-          </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-              disabled
-            >
-              Reject
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card text-center border rounded shadow"
-        style="
-          margin-top: 10px;
-          margin-right: 10px;
-          font-family: Actor, sans-serif;
-          margin-bottom: 10px;
-          margin-left: 10px;
-        "
-      >
-        <div
-          class="card-header"
-          style="background-color: #17706e; color: #f5f5f5;"
-        >
-          <div class="row">
-            <div class="col text-left">Approved</div>
-            <div class="col text-right">12/3/20</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <h4
-            class="text-lowercase card-title"
-            data-toggle="tooltip"
-            data-bs-tooltip=""
-            style="font-style: normal; color: #17706e;"
-            title="click to download"
-          >
-            kncjenn123.xslx
-          </h4>
-          <h6 class="text-muted card-subtitle mb-2">muneeb ur rehman</h6>
-          <p class="card-text">
-            This text is additional comments which user posted while
-            uploading&nbsp;
-          </p>
-          <div class="btn-group" role="group" style="padding-left: 0px;">
-            <button
-              class="btn btn-success border rounded"
-              type="button"
-              style="margin-right: 2px;"
-              disabled
-            >
-              Approve</button
-            ><button
-              class="btn btn-warning border rounded"
-              type="button"
-              style="margin-left: 2px;"
-            >
-              Reject
-            </button>
-          </div>
-        </div>
-      </div>
+      <h1 style="color: #f5f5f5;">Loading...</h1>
     </div>
     <!-- Footer -->
     <footer class="page-footer font-small blue">
@@ -299,6 +264,7 @@
     <!-- Footer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/valueRendrer.js"></script>
     <script src="./js/home.js"></script>
   </body>
 </html>
