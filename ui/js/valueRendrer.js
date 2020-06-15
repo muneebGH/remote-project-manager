@@ -5,7 +5,10 @@ function renderPostValue(
   link,
   fullName,
   userName,
-  comment
+  comment,
+  display,
+  approveDisabled,
+  rejectDisabled
 ) {
   return `<div
     class="card text-center border rounded shadow"
@@ -40,6 +43,24 @@ function renderPostValue(
       <p class="card-text">
         ${comment}
       </p>
+      <div class="btn-group" role="group" style="padding-left: 0px;">
+        <button
+          class="btn btn-success border rounded"
+          type="button"
+          style="margin-right: 2px;${display}"
+          ${approveDisabled}
+
+        >
+          Approve</button
+        ><button
+          class="btn btn-warning border rounded"
+          type="button"
+          style="margin-left: 2px;${display}"
+          ${rejectDisabled}
+        >
+          Reject
+        </button>
+      </div>
     </div>
   </div>`;
 }

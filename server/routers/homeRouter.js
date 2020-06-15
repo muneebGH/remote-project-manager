@@ -52,6 +52,12 @@ router.get("/fetchAllUserPosts", async (req, res) => {
   if (error) {
     res.sendStatus(500);
   } else {
+    if (req.cookies.admin == "true") {
+      result.isAdmin = true;
+    } else {
+      result.isAdmin = false;
+    }
+
     res.send(result);
   }
 });

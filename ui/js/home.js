@@ -53,6 +53,7 @@ function fetchPostsWithDateAndStatus(date, status) {
     (data, status) => {
       $("#postContainer").empty();
       data = data.reverse();
+
       data.forEach(addPostToPage);
       document.getElementById("refreshButton").innerText = "Refresh";
       $("#dateChooserModal").modal("hide");
@@ -62,7 +63,14 @@ function fetchPostsWithDateAndStatus(date, status) {
 
 function addPostToPage(post, index) {
   var date = new Date(post.date);
+  var approveDisabled = "";
+  var rejectDisabled = "";
 
+  var display = "";
+  var isAdmin = getCookie("admin");
+  if (isAdmin == "false") {
+    display = "display:none";
+  }
   var color;
   if (post.status == "pending") {
     color = "#393e46";
@@ -72,6 +80,11 @@ function addPostToPage(post, index) {
     color = "#d92027";
   }
 
+  if (post.status == "approved") {
+    approveDisabled = "disabled";
+  } else if (post.status == "rejected") {
+    rejectDisabled = "disabled";
+  }
   $("#postContainer").append(
     renderPostValue(
       color,
@@ -80,7 +93,10 @@ function addPostToPage(post, index) {
       post.link,
       post.fullName,
       post.userName,
-      post.comment
+      post.comment,
+      display,
+      approveDisabled,
+      rejectDisabled
     )
   );
 }

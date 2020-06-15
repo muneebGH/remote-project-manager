@@ -27,7 +27,6 @@ async function allPostsOfUser(userName, userDate, status, isAdmin) {
     queryObj.status = status;
   }
 
-  console.log(queryObj);
   var error = false;
   var response = await PostModel.find(queryObj, (err, res) => {
     if (err) {
