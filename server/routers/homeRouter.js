@@ -61,4 +61,21 @@ router.get("/fetchAllUserPosts", async (req, res) => {
     res.send(result);
   }
 });
+
+router.post("/deletePost", async (req, res) => {
+  console.log();
+  console.log("delete post called");
+  var [result, error] = await postHandler.deletePost(req.param("id"));
+  if (error) {
+    res.send("server error");
+  } else {
+    res.send("deleted");
+  }
+});
+
+router.post("/updateStatus", (req, res) => {
+  console.log(req.param("id"));
+  console.log(req.param("newStatus"));
+  console.log("updateStatus post called");
+});
 module.exports = router;

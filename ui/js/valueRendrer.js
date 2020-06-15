@@ -1,4 +1,5 @@
 function renderPostValue(
+  id,
   headerColor,
   status,
   dateTime,
@@ -20,6 +21,8 @@ function renderPostValue(
       margin-left: 10px;
     "
   >
+
+
     <div
       class="card-header"
       style="background-color: ${headerColor}; color: #f5f5f5;"
@@ -30,6 +33,7 @@ function renderPostValue(
       </div>
     </div>
     <div class="card-body">
+    <input type="hidden" id="postID" name="postId" value="${id}">
       <h4
         class="text-lowercase card-title"
         data-toggle="tooltip"
@@ -49,6 +53,7 @@ function renderPostValue(
           type="button"
           style="margin-right: 2px;${display}"
           ${approveDisabled}
+          onclick="approveHandler(event)"
 
         >
           Approve</button
@@ -57,8 +62,19 @@ function renderPostValue(
           type="button"
           style="margin-left: 2px;${display}"
           ${rejectDisabled}
+          onclick="rejectHandler(event)"
         >
           Reject
+        </button>
+        <button
+          class="btn btn-danger border rounded"
+          type="button"
+          style="margin-left: 2px;"
+          onclick="deleteHandler(event)"
+          id="deleteButton"
+
+        >
+          Delete
         </button>
       </div>
     </div>

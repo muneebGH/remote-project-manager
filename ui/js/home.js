@@ -89,6 +89,7 @@ function addPostToPage(post, index) {
   }
   $("#postContainer").append(
     renderPostValue(
+      post._id,
       color,
       post.status,
       date,

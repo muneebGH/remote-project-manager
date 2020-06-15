@@ -37,7 +37,18 @@ async function allPostsOfUser(userName, userDate, status, isAdmin) {
   return [response, error];
 }
 
+async function deletePost(id) {
+  var error = false;
+  var response = await PostModel.findByIdAndRemove(id, (err, result) => {
+    if (err) {
+      error = true;
+    }
+  });
+  return [response, error];
+}
+
 module.exports = {
   addPost: addPost,
   allPostsOfUser: allPostsOfUser,
+  deletePost: deletePost,
 };
