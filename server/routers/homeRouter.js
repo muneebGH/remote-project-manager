@@ -73,9 +73,17 @@ router.post("/deletePost", async (req, res) => {
   }
 });
 
-router.post("/updateStatus", (req, res) => {
+router.post("/updateStatus", async (req, res) => {
   console.log(req.param("id"));
   console.log(req.param("newStatus"));
-  console.log("updateStatus post called");
+  var [result, error] = await postHandler.updatePostStatus(
+    req.param("id"),
+    req.param("newStatus")
+  );
+  if (error) {
+    res.send("server error");
+  } else {
+    res.send("updated");
+  }
 });
 module.exports = router;

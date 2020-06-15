@@ -46,9 +46,22 @@ async function deletePost(id) {
   });
   return [response, error];
 }
-
+async function updatePostStatus(id, newStatus) {
+  var error = false;
+  var response = await PostModel.findByIdAndUpdate(
+    id,
+    { status: newStatus },
+    (err, result) => {
+      if (err) {
+        error = true;
+      }
+    }
+  );
+  return [response, error];
+}
 module.exports = {
   addPost: addPost,
   allPostsOfUser: allPostsOfUser,
   deletePost: deletePost,
+  updatePostStatus: updatePostStatus,
 };
