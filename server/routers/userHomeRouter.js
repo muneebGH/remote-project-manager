@@ -1,21 +1,29 @@
 const express = require("express");
 const path = require("path");
 const router = express.Router();
+const userAccessManager = require("./../utils/userAccessValidator");
 const cookieHandler = require("./../utils/cookieHandler");
 const postHandler = require("./../models/postHandler");
 
 const mongoose = require("mongoose");
 
 router.get("/", (req, res) => {
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   res.sendFile(path.resolve(__dirname + "/../../ui/userHome.html"));
 });
 
 router.post("/addPost", async (req, res) => {
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   var info = {
     link: req.param("link"),
     comment: req.param("comment"),
     userName: req.cookies.userName.toString(),
     fullName: req.cookies.fullName.toString(),
+    date: req.param("date"),
   };
   var error = false;
   try {
@@ -31,8 +39,14 @@ router.post("/addPost", async (req, res) => {
 });
 
 router.get("/fetchAllUserPosts", async (req, res) => {
+  if (!userAccessManager.isLoggedIn(req)) {
+    res.redirect("/login");
+  }
   console.log("gonna fetch user posts");
-  var [result, error] = await postHandler.allPostsOfUser(req.cookies.userName);
+  var [result, error] = await postHandler.allPostsOfUser(
+    req.cookies.userName,
+    req.param("date")
+  );
   if (error) {
     res.sendStatus(500);
   } else {

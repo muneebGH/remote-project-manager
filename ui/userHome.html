@@ -121,7 +121,7 @@
             <button
               class="btn btn-light border rounded shadow-sm"
               data-toggle="modal"
-              data-target="#exampleModal"
+              data-target="#dateChooserModal"
               type="button"
               style="font-family: Actor, sans-serif;"
             >
@@ -131,7 +131,7 @@
             <!-- Modal -->
             <div
               class="modal fade"
-              id="exampleModal"
+              id="dateChooserModal"
               tabindex="-1"
               role="dialog"
               aria-labelledby="exampleModalLabel"
@@ -155,11 +155,11 @@
                   <div class="modal-body">
                     <input
                       type="date"
-                      id="start"
+                      id="dateChooser"
                       name="trip-start"
                       value="2018-07-22"
-                      min="2018-01-01"
-                      max="2018-12-31"
+                      min="2020-06-14"
+                      max="2020-12-31"
                     />
                   </div>
                   <div class="modal-footer">
@@ -170,7 +170,11 @@
                     >
                       Close
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="dateChooserHandler(event)"
+                    >
                       See results
                     </button>
                   </div>

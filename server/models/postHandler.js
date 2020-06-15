@@ -6,6 +6,7 @@ async function addPost(info) {
     userName: info.userName,
     fullName: info.fullName,
     comment: info.comment,
+    date: info.date,
   };
   var postModel = new PostModel(post);
   console.log("going to save");
@@ -13,13 +14,17 @@ async function addPost(info) {
   console.log("saved");
 }
 
-async function allPostsOfUser(userName) {
+async function allPostsOfUser(userName, userDate) {
+  console.log(new Date().getUTCMonth());
   var error = false;
-  var response = await PostModel.find({ userName: userName }, (err, res) => {
-    if (err) {
-      error = true;
+  var response = await PostModel.find(
+    { userName: userName, date: userDate },
+    (err, res) => {
+      if (err) {
+        error = true;
+      }
     }
-  });
+  );
   console.log(`res :${response}`);
   console.log(`err :${error}`);
   return [response, error];

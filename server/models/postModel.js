@@ -6,7 +6,7 @@ var PostSchema = new Schema({
   userName: String,
   fullName: String,
   comment: String,
-  date: { type: Date, default: Date.now },
+  date: String,
   status: { type: String, default: "pending" },
 });
 
