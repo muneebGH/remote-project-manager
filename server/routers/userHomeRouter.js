@@ -45,7 +45,9 @@ router.get("/fetchAllUserPosts", async (req, res) => {
   console.log("gonna fetch user posts");
   var [result, error] = await postHandler.allPostsOfUser(
     req.cookies.userName,
-    req.param("date")
+    req.param("date"),
+    req.param("status"),
+    req.cookies.admin
   );
   if (error) {
     res.sendStatus(500);

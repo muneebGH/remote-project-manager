@@ -14,17 +14,26 @@ async function addPost(info) {
   console.log("saved");
 }
 
-async function allPostsOfUser(userName, userDate) {
-  console.log(new Date().getUTCMonth());
+async function allPostsOfUser(userName, userDate, status, isAdmin) {
+  var queryObj = { date: userDate };
+  if (isAdmin == "false") {
+    //if logged in user is admin the to get all result skip usernmae
+
+    queryObj.userName = userName;
+  }
+
+  if (status != "all") {
+    //if all status resulsts then skip status
+    queryObj.status = status;
+  }
+
+  console.log(queryObj);
   var error = false;
-  var response = await PostModel.find(
-    { userName: userName, date: userDate },
-    (err, res) => {
-      if (err) {
-        error = true;
-      }
+  var response = await PostModel.find(queryObj, (err, res) => {
+    if (err) {
+      error = true;
     }
-  );
+  });
   console.log(`res :${response}`);
   console.log(`err :${error}`);
   return [response, error];

@@ -1,7 +1,12 @@
 $(document).ready(function () {
   $("[data-bs-tooltip]").tooltip();
+  document.getElementById("welcomeText").innerText =
+    "Welcome " + getCookie("fullName");
   document.getElementById("dateChooser").value = getDateStr();
-  fetchPosts(null);
+  fetchPostsWithDateAndStatus(
+    $("#dateChooser").val(),
+    document.getElementById("dropdownMenu").innerText
+  );
 });
 
 function uploadPost(event) {
@@ -20,10 +25,13 @@ function uploadPost(event) {
     (data, status) => {
       //handle results callback
       if (data == "OK") {
-        //close the modal
+        // the modal
 
         $("#uploadModal").modal("hide");
-        fetchPosts(null);
+        fetchPostsWithDateAndStatus(
+          getDateStr(),
+          document.getElementById("dropdownMenu").innerText
+        );
         alert("new post added");
       } else {
         alert("post not added : try again");
@@ -33,27 +41,22 @@ function uploadPost(event) {
   );
 }
 
-function fetchPosts(event) {
-  var date = getDateStr();
-  console.log("fetching posts" + date);
+function fetchPostsWithDateAndStatus(date, status) {
+  //fetches data with given date
+
+  status = status.toLowerCase().trim();
+
   document.getElementById("refreshButton").innerText = "refreshing...";
-  $.get(`/userHome/fetchAllUserPosts?date=${date}`, (data, status) => {
-    $("#postContainer").empty();
-    data = data.reverse();
-    data.forEach(addPostToPage);
-    document.getElementById("refreshButton").innerText = "Refresh";
-  });
-}
-
-function fetchPostsWithDate(date) {
-  console.log("fetching posts" + date);
-
-  $.get(`/userHome/fetchAllUserPosts?date=${date}`, (data, status) => {
-    $("#postContainer").empty();
-    data = data.reverse();
-    data.forEach(addPostToPage);
-    $("#dateChooserModal").modal("hide");
-  });
+  $.get(
+    `/userHome/fetchAllUserPosts?date=${date}&status=${status}`,
+    (data, status) => {
+      $("#postContainer").empty();
+      data = data.reverse();
+      data.forEach(addPostToPage);
+      document.getElementById("refreshButton").innerText = "Refresh";
+      $("#dateChooserModal").modal("hide");
+    }
+  );
 }
 
 function addPostToPage(post, index) {
@@ -81,8 +84,39 @@ function addPostToPage(post, index) {
   );
 }
 
+function AllDropdownButtonHandler(event) {
+  document.getElementById("dropdownMenu").innerText = "loading...";
+  fetchPostsWithDateAndStatus($("#dateChooser").val(), "all");
+  document.getElementById("dropdownMenu").innerText = "All";
+}
+
+function pendingDropdownButtonHandler(event) {
+  document.getElementById("dropdownMenu").innerText = "loading...";
+  fetchPostsWithDateAndStatus($("#dateChooser").val(), "pending");
+  document.getElementById("dropdownMenu").innerText = "Pending";
+}
+
+function approvedDropdownButtonHandler(event) {
+  document.getElementById("dropdownMenu").innerText = "loading...";
+  fetchPostsWithDateAndStatus($("#dateChooser").val(), "approved");
+  document.getElementById("dropdownMenu").innerText = "Approved";
+}
+function rejectedDropdownButtonHandler(event) {
+  document.getElementById("dropdownMenu").innerText = "loading...";
+  fetchPostsWithDateAndStatus($("#dateChooser").val(), "rejected");
+  document.getElementById("dropdownMenu").innerText = "Rejected";
+}
+function refreshHandler(event) {
+  fetchPostsWithDateAndStatus(
+    $("#dateChooser").val(),
+    document.getElementById("dropdownMenu").innerText
+  );
+}
 function dateChooserHandler(event) {
-  fetchPostsWithDate($("#dateChooser").val());
+  fetchPostsWithDateAndStatus(
+    $("#dateChooser").val(),
+    document.getElementById("dropdownMenu").innerText
+  );
 }
 function getDateStr() {
   var date = new Date();
@@ -101,4 +135,20 @@ function getDateStr() {
     dateStr = dateNumber;
   }
   return date.getFullYear() + "-" + monthStr + "-" + dateStr;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
