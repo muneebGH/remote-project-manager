@@ -1,7 +1,7 @@
 var db = require("mongoose");
 
 async function establishConnection() {
-  dbUrl = String.raw`mongodb+srv://muneeb:Ie1Tfvbp2KIxe8X3@team-mpl-d6w1x.mongodb.net/teamMPL?retryWrites=true&w=majority`;
+  dbUrl = String.raw`dburlhere`;
 
   await db.connect(
     dbUrl,
